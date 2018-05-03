@@ -10,7 +10,7 @@ class StageOne extends React.Component {
             isolationTypes: [
                 {name: "Одлична", value: 0.5},
                 {name: "Просечна", value: 0.7},
-                {name: "Добра", value: 1}
+                {name: "Лоша", value: 1}
             ],
             selectedIsoType: 0.5,
         }

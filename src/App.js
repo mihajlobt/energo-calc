@@ -8,8 +8,7 @@ import './styles/base.scss';
 class App extends React.Component {
     constructor(props) {
         super(props);
-        let yearlySystemExpense = 0.45,
-            yearlySystemExpenseCoef = 2928;
+
 
         let systemType = [
             {
@@ -50,6 +49,24 @@ class App extends React.Component {
             },
         ];
 
+        systemType = this.calculateSystemTypes(systemType);
+
+        this.state = {
+            view: 1,
+            selectedSystemPower: null,
+            systemType: systemType,
+            minPower: 0,
+            value: 0,
+            additionalSystemSelected: [],
+            additionalSystem: null,
+            totalInstallationCost: 0
+        };
+    }
+
+    calculateSystemTypes = systemType => {
+        let yearlySystemExpense = 0.45,
+            yearlySystemExpenseCoef = 2928;
+
         for (let i = 0; i < systemType.length; i++) {
             let type = systemType[i];
             type.expense = (type.value * yearlySystemExpense) * yearlySystemExpenseCoef;
@@ -73,18 +90,8 @@ class App extends React.Component {
 
             type.tenYearInvestment = parseInt(price) + parseInt((type.yearlyExpense * 10));
         }
-
-        this.state = {
-            view: 1,
-            selectedSystemPower: null,
-            systemType: systemType,
-            minPower: 0,
-            value: 0,
-            additionalSystemSelected: [],
-            additionalSystem: null,
-            totalInstallationCost: 0
-        };
-    }
+        return systemType;
+    };
 
 
     nextStep = () => {
@@ -115,6 +122,14 @@ class App extends React.Component {
         this.setState(state);
     };
 
+    calculateTables = (item, index, event) => {
+        let systemType = this.state.systemType, selectedType = systemType[index];
+
+        selectedType.value = event.target.value;
+        this.calculateSystemTypes(systemType);
+        this.setState(this.state);
+    };
+
     render() {
         let stage;
 
@@ -124,7 +139,7 @@ class App extends React.Component {
             )
         } else if (this.state.view === 2) {
             stage = (
-                <StageTwo parentState={this.state}/>
+                <StageTwo calculateTables={this.calculateTables} parentState={this.state}/>
             )
         } else if (this.state.view === 3) {
             stage = (

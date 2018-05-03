@@ -13,7 +13,7 @@ class StageTwo extends React.Component {
             <div className="system-type" key={index}>
                 <div className="system-table-row name">{item.name}</div>
                 <div className="system-table-row type">{item.type}</div>
-                <div className="system-table-row value">{item.value}</div>
+                <input type="number" defaultValue={item.value} onChange={this.props.calculateTables.bind(this, item, index)}/>
                 <div className="system-table-row type">{item.type}</div>
                 <div className="system-table-row">{item.price}</div>
                 <div className="system-table-row yearly">{item.expense.toFixed(2)}kWh</div>
@@ -26,7 +26,7 @@ class StageTwo extends React.Component {
             <div className="system-type">
                 <div className="system-table-row name">Систем</div>
                 <div className="system-table-row">Погоден за</div>
-                <div className="system-table-row">Mоќност</div>
+                <div className="system-table-row">Mоќност [kw/h]</div>
                 <div className="system-table-row">Погоден за</div>
                 <div className="system-table-row">Цена</div>
                 <div className="system-table-row yearly">Просечна годишна потрошувачка (16 часа греење на ден, 6 месеци)</div>

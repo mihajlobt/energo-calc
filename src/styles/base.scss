@@ -55,6 +55,14 @@ body {
     border: 1px solid #cecece;
     border-right: none;
     flex: 1;
+    overflow: hidden;
+
+    input {
+      border: none;
+      border-bottom: 1px solid #cecece;
+      min-height: 35px;
+      flex: 1;
+    }
 
     &:last-child {
       border-right: 1px solid #cecece;
@@ -65,6 +73,8 @@ body {
 input, select {
   font-size: 18px;
   padding: 10px;
+  border: 1px solid #cecece;
+  background: transparent;
 }
 
 .system-type, .selected-system-type {
